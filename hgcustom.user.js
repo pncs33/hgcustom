@@ -13,7 +13,7 @@
 let SbuttonUrl = location.href
 console.log(SbuttonUrl);
 if (SbuttonUrl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
-    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="Sボタン" style="width:80px;height:27px;font-size:13px;background:#FF6633;" >').click(function () {
+    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="Sボタン" style="width:80px;height:27px;font-size:13px;background:#FFC898;" >').click(function () {
         var NameAndjoinnum = []
         for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
             var testPspan = document.getElementsByClassName('col-sm-7 text-left')[pidi].getElementsByTagName('span')[1].textContent
@@ -28,11 +28,24 @@ if (SbuttonUrl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
             var womanAge = document.getElementsByClassName('table table-sm table-bordered')[pidi].textContent.match(/(?<=年齢・条件\（女性\）\d+[~〜～])\d+(?=歳)/)
             var womanJsPass = document.querySelector(`#edit_party_${cusparty_id} > table > tbody > tr:nth-child(10) > td:nth-child(2) > div`).innerHTML.match(/(.*?)(?=<br>)/)[0]
             womanAge = womanAge || womanJsPass;
-
             NameAndjoinnum.push(`${cusidinp1} ${testPspan} ${cusidinp2} ${cusidinp3} ${joinman}-${joinwoman}(${kikakunum}-${kikakunum}) ${womanAge}`);
         }
         console.log(NameAndjoinnum.join('\n'));
         navigator.clipboard.writeText(NameAndjoinnum.join('\n'));
+    }))
+    $('.text-left:eq(0)').append($('<input type="button" id="id29987" value="編集画面一括Open(重いので注意)" style="width:280px;height:27px;font-size:14px;background:#CDF2CA;" >').click(function () {
+        for (var i = 3; i <= document.getElementsByClassName('btn btn-default btn-sm').length; i = i + 5) {
+            var test = document.getElementsByClassName('btn btn-default btn-sm')[i].href
+            window.open(test);
+        }
+    }))
+    $('.text-left:eq(0)').append($('<input type="button" id="id29988" value="参加者一覧画面一括Open(重いので注意)" style="width:280px;height:27px;font-size:14px;background:#FFDEFA;" >').click(function () {
+        for (var i = 1; i <= document.getElementsByClassName('btn btn-default btn-sm').length; i++) {
+            if ((i % 5) == 0) {
+                var test = document.getElementsByClassName('btn btn-default btn-sm')[i].href
+                window.open(test);
+            }
+        }
     }))
 }
 if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エクスポート
@@ -122,7 +135,6 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
             adjustmentJoinedCountMan = joinedCountMan
             adjustmentJoinedCountWoman = joinedCountMan
             doubletalkArryinitialize(adjustmentJoinedCountWoman)
-
         }
         function overlappingAndBlank(ver, ary, specifyMan, selectWoman, No1or2or3) {
             var included = false
@@ -143,7 +155,6 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
             } else {
                 return false
             }
-
         }
         function overlappingAndBlank_manTo(ary, specifyMan, selectWoman, No1or2or3) {
             var included = false
@@ -165,12 +176,8 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
         }
         //女性優先両想いver
         for (var No1to3man = 0; No1to3man < goodVoteWoman.length; No1to3man++) {
-
-
             for (var selectWoman = 0; selectWoman < goodVoteWoman.length; selectWoman++) {
                 var WomanVote = goodVoteWoman[selectWoman]
-
-
                 var specifyMan = WomanVote[No1to3man]
                 // console.log(`第${No1to3man + 1}希望 ${selectWoman + 1} ${specifyMan} `)
                 specifyMan = specifyMan || 0
@@ -255,8 +262,6 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
                 }
             }
 
-
-
         }
         //男性片思いver
         for (var No1to3woman_manTo = 0; No1to3woman_manTo < goodVoteMan.length; No1to3woman_manTo++) {
@@ -300,52 +305,52 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
                 }
             }
 
-        }console.log(doubletalkResult)
+        } console.log(doubletalkResult)
         {
-        var blankdoubletalkResult = doubletalkResult
+            var blankdoubletalkResult = doubletalkResult
 
-        //空席埋める
-        function overlappingAndBlank_Blank(ary, Blankman, selectWoman, No1or2or3) {
-            var included = false
-            var Blankjudgment = false
-            if (ary.includes(Blankman) == false) {
-                included = true
+            //空席埋める
+            function overlappingAndBlank_Blank(ary, Blankman, selectWoman, No1or2or3) {
+                var included = false
+                var Blankjudgment = false
+                if (ary.includes(Blankman) == false) {
+                    included = true
+                }
+                if (blankdoubletalkResult[selectWoman][No1or2or3] == 0) {
+                    Blankjudgment = true
+                }
+                if (blankdoubletalkResult[selectWoman].includes(Blankman) == true) {
+                    Blankjudgment = false
+                }
+                if (included && Blankjudgment) {
+                    return true
+                } else {
+                    return false
+                }
             }
-            if (blankdoubletalkResult[selectWoman][No1or2or3] == 0) {
-                Blankjudgment = true
-            }
-            if (blankdoubletalkResult[selectWoman].includes(Blankman) == true) {
-                Blankjudgment = false
-            }
-            if (included && Blankjudgment) {
-                return true
-            } else {
-                return false
-            }
-        }
 
-        for (var No1to3_Blank = 0; No1to3_Blank < 3; No1to3_Blank++) {
-            for (var selectWoman = 0; selectWoman < blankdoubletalkResult.length; selectWoman++) {
-                if(blankdoubletalkResult[selectWoman][No1to3_Blank] == 0){
-                    var ary = [];
+            for (var No1to3_Blank = 0; No1to3_Blank < 3; No1to3_Blank++) {
+                for (var selectWoman = 0; selectWoman < blankdoubletalkResult.length; selectWoman++) {
+                    if (blankdoubletalkResult[selectWoman][No1to3_Blank] == 0) {
+                        var ary = [];
 
-                    for (var i0 = 0; i0 < adjustmentJoinedCountWoman; i0++) {
-                        ary.push(blankdoubletalkResult[i0][No1to3_Blank])
-                    }
+                        for (var i0 = 0; i0 < adjustmentJoinedCountWoman; i0++) {
+                            ary.push(blankdoubletalkResult[i0][No1to3_Blank])
+                        }
 
-                    for (var Blankman = 0; Blankman < adjustmentJoinedCountMan; Blankman++) {
-                        var TorFblank = overlappingAndBlank_Blank(ary, Blankman+1, selectWoman, No1to3_Blank)
-                        if(TorFblank == true){
-                            blankdoubletalkResult[selectWoman][No1to3_Blank] = Blankman + 1
+                        for (var Blankman = 0; Blankman < adjustmentJoinedCountMan; Blankman++) {
+                            var TorFblank = overlappingAndBlank_Blank(ary, Blankman + 1, selectWoman, No1to3_Blank)
+                            if (TorFblank == true) {
+                                blankdoubletalkResult[selectWoman][No1to3_Blank] = Blankman + 1
+
+                            }
 
                         }
 
                     }
-
                 }
             }
         }
-    }
 
     }))
 
@@ -569,9 +574,6 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
 
                 }
             }
-
-
-
         }
         //男性片思いver
         for (var No1to3woman_manTo = 0; No1to3woman_manTo < goodVoteMan.length; No1to3woman_manTo++) {
@@ -615,7 +617,7 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
                 }
             }
 
-        }console.log(doubletalkResult)
+        } console.log(doubletalkResult)
 
     }))
 }
