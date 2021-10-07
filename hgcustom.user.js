@@ -305,7 +305,7 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
                 }
             }
 
-        } console.log(doubletalkResult)
+        }//console.log(doubletalkResult)
         {
             var blankdoubletalkResult = doubletalkResult
 
@@ -350,6 +350,10 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
                     }
                 }
             }
+            console.log('投票結果から空席をランダムで埋めたver')
+        for (var i = 0; i < blankdoubletalkResult.length; i++) {
+    console.log(`女${i+1}番 ${blankdoubletalkResult[i]}`);
+}
         }
 
     }))
@@ -617,7 +621,11 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
                 }
             }
 
-        } console.log(doubletalkResult)
+        }
+console.log('投票結果のみを考慮')
+        for (var i = 0; i < doubletalkResult.length; i++) {
+    console.log(`女${i+1}番 ${doubletalkResult[i]}`);
+}
 
     }))
 }
