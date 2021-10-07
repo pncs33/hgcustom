@@ -13,7 +13,7 @@
 let SbuttonUrl = location.href
 console.log(SbuttonUrl);
 if (SbuttonUrl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
-    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="Sボタン" style="width:80px;height:27px;font-size:13px;background:#FFC898;" >').click(function () {
+    $('.text-left:eq(0)').append($('<input type="button" id="id001102" value="Sボタン" style="width:80px;height:27px;font-size:13px;background:#777777;" >').click(function () {
         var NameAndjoinnum = []
         for (var pidi = 0; pidi < document.getElementsByClassName('col-sm-7 text-left').length; pidi++) {
             var testPspan = document.getElementsByClassName('col-sm-7 text-left')[pidi].getElementsByTagName('span')[1].textContent
@@ -33,18 +33,26 @@ if (SbuttonUrl.match(/^(?=.*admin)(?=.*parties)(?=.*search)/)) {
         console.log(NameAndjoinnum.join('\n'));
         navigator.clipboard.writeText(NameAndjoinnum.join('\n'));
     }))
-    $('.text-left:eq(0)').append($('<input type="button" id="id29987" value="編集画面一括Open(重いので注意)" style="width:280px;height:27px;font-size:14px;background:#CDF2CA;" >').click(function () {
-        for (var i = 3; i <= document.getElementsByClassName('btn btn-default btn-sm').length; i = i + 5) {
-            var test = document.getElementsByClassName('btn btn-default btn-sm')[i].href
+    $('.text-left:eq(0)').append($('<input type="button" id="id29987" value="編集画面一括Open(処理が終わるまで触らず待機)" style="width:340px;height:27px;font-size:14px;background:#777777;" >').click(function () {
+        var count = 0;
+        var aryEdit = $("a:contains('編集')")
+        var maxCount = aryEdit.length / 2   
+        var timer = setInterval(function () {
+            
+            if (count >= maxCount * 2 - 2) {
+                clearInterval(timer);                
+            }            
+            console.log(count)
+            var test = aryEdit[count].href
             window.open(test);
-        }
+            count = count + 2;
+        }, 500);
     }))
-    $('.text-left:eq(0)').append($('<input type="button" id="id29988" value="参加者一覧画面一括Open(重いので注意)" style="width:280px;height:27px;font-size:14px;background:#FFDEFA;" >').click(function () {
-        for (var i = 1; i <= document.getElementsByClassName('btn btn-default btn-sm').length; i++) {
-            if ((i % 5) == 0) {
-                var test = document.getElementsByClassName('btn btn-default btn-sm')[i].href
+    $('.text-left:eq(0)').append($('<input type="button" id="id29988" value="参加者一覧画面一括Open(重いので注意)" style="width:280px;height:27px;font-size:14px;background:#777777;" >').click(function () {
+        var joinary = $("a:contains('参加者・進行')")
+        for (var i = 0; i <= joinary.length; i++) {
+                var test = joinary[i].href
                 window.open(test);
-            }
         }
     }))
 }
@@ -351,9 +359,9 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
                 }
             }
             console.log('投票結果から空席をランダムで埋めたver')
-        for (var i = 0; i < blankdoubletalkResult.length; i++) {
-    console.log(`女${i+1}番 ${blankdoubletalkResult[i]}`);
-}
+            for (var i = 0; i < blankdoubletalkResult.length; i++) {
+                console.log(`女${i + 1}番 ${blankdoubletalkResult[i]}`);
+            }
         }
 
     }))
@@ -622,10 +630,10 @@ if (SbuttonUrl.match(/^(?=.*detail)(?=.*smartdevice_parties)/)) {//結果エク�
             }
 
         }
-console.log('投票結果のみを考慮')
+        console.log('投票結果のみを考慮')
         for (var i = 0; i < doubletalkResult.length; i++) {
-    console.log(`女${i+1}番 ${doubletalkResult[i]}`);
-}
+            console.log(`女${i + 1}番 ${doubletalkResult[i]}`);
+        }
 
     }))
 }
