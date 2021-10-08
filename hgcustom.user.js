@@ -7,8 +7,8 @@
 // @match        https://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
-// @updateURL    https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
-// @downloadURL  https://github.com/yamatohagi/TampermonkeyScript/raw/main/test.user.js
+// @updateURL    https://github.com/pncs33/hgcustom/raw/main/hgcustom.user.js
+// @downloadURL  https://github.com/pncs33/hgcustom/raw/main/hgcustom.user.js
 // ==/UserScript==
 let SbuttonUrl = location.href
 console.log(SbuttonUrl);
